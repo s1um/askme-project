@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김민주 | 자기소개</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    :root {
+      --primary: #6c63ff;
+      --secondary: #ff6584;
+      --accent: #43e97b;
+      --dark: #1a1a2e;
+      --card-bg: #ffffff;
+      --text: #333;
+      --muted: #888;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f5f7ff;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* 배경 원 장식 */
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.12;
+    }
+    .hero::before {
+      width: 600px; height: 600px;
+      background: var(--primary);
+      top: -150px; left: -150px;
+    }
+    .hero::after {
+      width: 400px; height: 400px;
+      background: var(--secondary);
+      bottom: -100px; right: -100px;
+    }
+
+    .hero-content { position: relative; z-index: 1; padding: 40px 20px; }
+
+    .avatar-wrap {
+      position: relative;
+      width: 150px; height: 150px;
+      margin: 0 auto 28px;
+    }
+    .avatar-wrap .ring {
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary), var(--secondary), var(--accent), var(--primary));
+      animation: spin 4s linear infinite;
+    }
+    .avatar {
+      position: relative; z-index: 1;
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      background: #2a2a4a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+      border: 4px solid #1a1a2e;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hero h1 {
+      font-size: 3rem; font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+    .hero h1 span { color: var(--primary); }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(108,99,255,0.25);
+      color: #a89dff;
+      border: 1px solid rgba(108,99,255,0.4);
+      padding: 6px 20px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero p.intro {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+
+    .hero-stats {
+      display: flex; gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat .num {
+      font-size: 2rem; font-weight: 900;
+      color: var(--primary);
+    }
+    .stat .label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 2px;
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── SECTION LAYOUT ── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem; font-weight: 900;
+      margin-bottom: 40px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-title .line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary), transparent);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      border-left: 4px solid var(--primary);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .about-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(108,99,255,0.15); }
+    .about-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .about-card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 8px; }
+    .about-card p { font-size: 0.95rem; color: #555; line-height: 1.75; }
+
+    /* ── MAJOR ── */
+    .major-box {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      border-radius: 24px;
+      padding: 48px 40px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .major-box::before {
+      content: '{ }';
+      position: absolute;
+      right: 32px; top: 24px;
+      font-size: 5rem;
+      font-weight: 900;
+      color: rgba(108,99,255,0.18);
+      font-family: monospace;
+    }
+    .major-box h3 {
+      font-size: 1.6rem; font-weight: 900;
+      margin-bottom: 16px;
+      color: #a89dff;
+    }
+    .major-box p {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.78);
+      max-width: 580px;
+      margin-bottom: 28px;
+    }
+    .course-chips {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .chip {
+      background: rgba(108,99,255,0.25);
+      color: #c4bfff;
+      border: 1px solid rgba(108,99,255,0.35);
+      padding: 5px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    /* ── INTERESTS ── */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .interest-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .interest-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+    .interest-card .color-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .interest-card .emoji { font-size: 2.5rem; margin-bottom: 14px; }
+    .interest-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .interest-card p { font-size: 0.88rem; color: #666; line-height: 1.7; }
+
+    /* ── SKILLS ── */
+    .skills-list { display: flex; flex-direction: column; gap: 18px; }
+    .skill-row { display: flex; align-items: center; gap: 16px; }
+    .skill-row .name {
+      width: 110px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #444;
+      flex-shrink: 0;
+    }
+    .bar-bg {
+      flex: 1;
+      height: 10px;
+      background: #e8e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      animation: growBar 1.2s ease-out forwards;
+      transform-origin: left;
+    }
+    @keyframes growBar { from { width: 0; } }
+    .skill-row .pct {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 700;
+      width: 36px;
+      text-align: right;
+    }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      background: linear-gradient(135deg, #6c63ff, #ff6584);
+      border-radius: 24px;
+      padding: 48px;
+      text-align: center;
+      color: white;
+    }
+    .contact-box h3 { font-size: 1.8rem; font-weight: 900; margin-bottom: 12px; }
+    .contact-box p { opacity: 0.85; margin-bottom: 28px; font-size: 1rem; }
+    .contact-links {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 14px;
+    }
+    .contact-btn {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background .2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .contact-btn:hover { background: rgba(255,255,255,0.35); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.82rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="avatar-wrap">
+      <div class="ring"></div>
+      <div class="avatar">👩‍💻</div>
+    </div>
+    <h1>안녕하세요,<br><span>김민주</span>입니다</h1>
+    <div class="badge">컴퓨터공학과 3학년</div>
+    <p class="intro">
+      코드로 세상을 더 편리하게 만들고 싶은 개발자 지망생입니다.<br>
+      배우는 것을 두려워하지 않고, 꾸준히 성장하는 것을 목표로 합니다.
+    </p>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">3</div><div class="label">학년</div></div>
+      <div class="stat"><div class="num">20+</div><div class="label">수강 과목</div></div>
+      <div class="stat"><div class="num">5+</div><div class="label">프로젝트</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">▼ 스크롤하여 더 보기</div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<div class="section">
+  <h2 class="section-title">🙋 About Me <span class="line"></span></h2>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="icon">🎓</div>
+      <h3>학력</h3>
+      <p>컴퓨터공학과 3학년 재학 중<br>알고리즘, 자료구조, 운영체제 등 핵심 과목 수강 완료</p>
+    </div>
+    <div class="about-card">
+      <div class="icon">💡</div>
+      <h3>모토</h3>
+      <p>"오늘 배운 것이 내일의 나를 만든다"<br>매일 조금씩 성장하는 개발자를 목표로 합니다.</p>
+    </div>
+    <div class="about-card">
+      <div class="icon">📚</div>
+      <h3>취미</h3>
+      <p>기술 블로그 읽기, 오픈소스 코드 탐구,<br>코딩 챌린지 및 알고리즘 문제 풀이</p>
+    </div>
+    <div class="about-card">
+      <div class="icon">🎯</div>
+      <h3>목표</h3>
+      <p>사용자에게 실질적인 가치를 주는<br>서비스를 만드는 풀스택 개발자</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAJOR ══ -->
+<div style="background: #f0f0ff; padding: 1px 0;">
+  <div class="section">
+    <h2 class="section-title">💻 전공 소개 <span class="line"></span></h2>
+    <div class="major-box">
+      <h3>컴퓨터공학 (Computer Science & Engineering)</h3>
+      <p>
+        컴퓨터공학은 하드웨어와 소프트웨어의 원리를 탐구하고,
+        알고리즘·자료구조부터 운영체제·네트워크·데이터베이스까지
+        컴퓨터 시스템 전반을 다루는 학문입니다.<br><br>
+        저는 3학년 과정을 통해 이론적 토대를 쌓는 동시에
+        팀 프로젝트와 개인 프로젝트로 실무 감각을 키우고 있습니다.
+      </p>
+      <div class="course-chips">
+        <span class="chip">자료구조</span>
+        <span class="chip">알고리즘</span>
+        <span class="chip">운영체제</span>
+        <span class="chip">데이터베이스</span>
+        <span class="chip">컴퓨터 네트워크</span>
+        <span class="chip">소프트웨어공학</span>
+        <span class="chip">웹 프로그래밍</span>
+        <span class="chip">인공지능 개론</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INTERESTS ══ -->
+<div class="section">
+  <h2 class="section-title">✨ 관심 분야 <span class="line"></span></h2>
+  <div class="interests-grid">
+    <div class="interest-card">
+      <div class="color-bar" style="background: linear-gradient(to right,#6c63ff,#a89dff);"></div>
+      <div class="emoji">🌐</div>
+      <h3>웹 개발</h3>
+      <p>React, Node.js를 활용한 풀스택 웹 개발에 관심이 있습니다. 사용자가 편리하게 쓸 수 있는 UI/UX를 구현하고 싶습니다.</p>
+    </div>
+    <div class="interest-card">
+      <div class="color-bar" style="background: linear-gradient(to right,#ff6584,#ffb3c1);"></div>
+      <div class="emoji">🤖</div>
+      <h3>인공지능 / 머신러닝</h3>
+      <p>데이터를 학습해 의미 있는 결과를 만들어내는 AI 기술에 흥미를 느낍니다. Python과 PyTorch로 공부 중입니다.</p>
+    </div>
+    <div class="interest-card">
+      <div class="color-bar" style="background: linear-gradient(to right,#43e97b,#38f9d7);"></div>
+      <div class="emoji">🔐</div>
+      <h3>보안</h3>
+      <p>안전한 소프트웨어를 만들기 위한 보안의 중요성을 느끼고 있으며, CTF 문제를 풀며 기초를 다지고 있습니다.</p>
+    </div>
+    <div class="interest-card">
+      <div class="color-bar" style="background: linear-gradient(to right,#f7971e,#ffd200);"></div>
+      <div class="emoji">📱</div>
+      <h3>앱 개발</h3>
+      <p>일상의 불편함을 해결하는 모바일 앱을 만들고 싶습니다. Flutter를 통해 크로스플랫폼 개발을 공부 중입니다.</p>
+    </div>
+    <div class="interest-card">
+      <div class="color-bar" style="background: linear-gradient(to right,#4facfe,#00f2fe);"></div>
+      <div class="emoji">☁️</div>
+      <h3>클라우드 / DevOps</h3>
+      <p>AWS와 Docker를 활용한 클라우드 인프라와 배포 자동화에 관심이 생겨 개인 프로젝트에 적용해보고 있습니다.</p>
+    </div>
+    <div class="interest-card">
+      <div class="color-bar" style="background: linear-gradient(to right,#a18cd1,#fbc2eb);"></div>
+      <div class="emoji">🧩</div>
+      <h3>알고리즘</h3>
+      <p>백준·프로그래머스에서 꾸준히 문제를 풀며 논리적 사고력을 키우고 있습니다. 코딩 테스트 준비 중입니다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SKILLS ══ -->
+<div style="background: #f0f0ff; padding: 1px 0;">
+  <div class="section">
+    <h2 class="section-title">🛠 기술 스택 <span class="line"></span></h2>
+    <div class="skills-list">
+      <div class="skill-row">
+        <div class="name">Python</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
+        <div class="pct">80%</div>
+      </div>
+      <div class="skill-row">
+        <div class="name">Java</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div>
+        <div class="pct">70%</div>
+      </div>
+      <div class="skill-row">
+        <div class="name">HTML / CSS</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
+        <div class="pct">75%</div>
+      </div>
+      <div class="skill-row">
+        <div class="name">JavaScript</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:60%"></div></div>
+        <div class="pct">60%</div>
+      </div>
+      <div class="skill-row">
+        <div class="name">C / C++</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:55%"></div></div>
+        <div class="pct">55%</div>
+      </div>
+      <div class="skill-row">
+        <div class="name">SQL</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div>
+        <div class="pct">50%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div class="section">
+  <h2 class="section-title">📬 연락처 <span class="line"></span></h2>
+  <div class="contact-box">
+    <h3>함께 성장해요!</h3>
+    <p>프로젝트 협업, 스터디, 또는 궁금한 점이 있으시면 편하게 연락해 주세요.</p>
+    <div class="contact-links">
+      <a class="contact-btn" href="mailto:gimminju371@gmail.com">✉️ 이메일</a>
+      <a class="contact-btn" href="#">🐙 GitHub</a>
+      <a class="contact-btn" href="#">💼 LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 김민주 · 컴퓨터공학과 3학년 · Designed with ❤️
+</footer>
+
+</body>
+</html>

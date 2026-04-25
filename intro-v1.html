@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자기소개</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #4f8ef7, #764ba2);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      border: 4px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero .tagline {
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    /* Main Content */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      color: #4f8ef7;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eef2ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      line-height: 1.8;
+      color: #555;
+    }
+
+    /* Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .info-item {
+      background: #f8faff;
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .info-item .label {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .info-item .value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      background: #eef2ff;
+      color: #4f8ef7;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Contact */
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #555;
+    }
+
+    .contact-list .icon {
+      font-size: 1.2rem;
+      width: 28px;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="avatar">😊</div>
+    <h1>김민주</h1>
+    <p class="tagline">안녕하세요! 저의 자기소개 페이지에 오신 것을 환영합니다.</p>
+  </section>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- 기본 정보 -->
+    <div class="card">
+      <h2>📋 기본 정보</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">이름</div>
+          <div class="value">김민주</div>
+        </div>
+        <div class="info-item">
+          <div class="label">이메일</div>
+          <div class="value">gimminju371@gmail.com</div>
+        </div>
+        <div class="info-item">
+          <div class="label">거주지</div>
+          <div class="value">대한민국</div>
+        </div>
+        <div class="info-item">
+          <div class="label">관심 분야</div>
+          <div class="value">웹 개발</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 자기소개 -->
+    <div class="card">
+      <h2>👋 소개</h2>
+      <p>
+        안녕하세요, 김민주입니다.<br><br>
+        새로운 것을 배우는 것을 좋아하고, 꾸준히 성장하기 위해 노력하고 있습니다.
+        이 페이지는 저를 소개하기 위해 만들었습니다.
+        앞으로도 다양한 프로젝트에 도전하며 경험을 쌓아가겠습니다.
+      </p>
+    </div>
+
+    <!-- 기술 스택 -->
+    <div class="card">
+      <h2>🛠 기술 / 관심사</h2>
+      <div class="skills">
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">웹 디자인</span>
+        <span class="skill-tag">문제 해결</span>
+      </div>
+    </div>
+
+    <!-- 연락처 -->
+    <div class="card">
+      <h2>📬 연락처</h2>
+      <ul class="contact-list">
+        <li><span class="icon">✉️</span> gimminju371@gmail.com</li>
+        <li><span class="icon">🌐</span> 웹사이트 / 포트폴리오 (추가 예정)</li>
+        <li><span class="icon">💼</span> GitHub / LinkedIn (추가 예정)</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2026 김민주. All rights reserved.
+  </footer>
+
+</body>
+</html>

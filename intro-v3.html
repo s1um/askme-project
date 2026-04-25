@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김민주 | 자기소개</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #6f6a80;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+      min-height: 100vh;
+      padding: 40px 16px 60px;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #a89dff;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #666a8a;
+    }
+
+    /* ── 그리드 ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ── 카드 공통 ── */
+    .card {
+      background: #16213e;
+      border: 1px solid #2a2a4e;
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(108, 99, 255, 0.2);
+      border-color: #6c63ff;
+    }
+
+    .card-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6c63ff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #2a2a4e;
+    }
+
+    /* ── 프로필 섹션 ── */
+    .profile-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6c63ff, #ff6584);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+    }
+
+    .profile-name {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #e0e0e0;
+      margin-bottom: 6px;
+    }
+
+    .profile-major {
+      font-size: 0.9rem;
+      color: #a89dff;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .profile-bio {
+      font-size: 0.95rem;
+      color: #9a9abf;
+      line-height: 1.75;
+      padding: 14px 16px;
+      background: #6f6a80;
+      border-radius: 12px;
+      border-left: 3px solid #6c63ff;
+    }
+
+    /* ── 기술 스택 섹션 ── */
+    .badge-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .badge:hover {
+      transform: scale(1.06);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .badge-html  { background: #2d1b00; color: #ff8c42; border-color: #5a3010; }
+    .badge-css   { background: #001e3c; color: #5bc0eb; border-color: #0a3a6a; }
+    .badge-js    { background: #2d2800; color: #f7df1e; border-color: #5a4f00; }
+    .badge-py    { background: #001a10; color: #4ac26b; border-color: #0a3820; }
+
+    .badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge-html .dot  { background: #ff8c42; }
+    .badge-css .dot   { background: #5bc0eb; }
+    .badge-js .dot    { background: #f7df1e; }
+    .badge-py .dot    { background: #4ac26b; }
+
+    .skill-desc {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: #666a8a;
+      line-height: 1.7;
+    }
+
+    /* ── 프로젝트 섹션 ── */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .project-item {
+      background: #6f6a80;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid #2a2a4e;
+      transition: border-color 0.2s;
+    }
+
+    .project-item:hover {
+      border-color: #6c63ff;
+    }
+
+    .project-item h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #e0e0e0;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-item p {
+      font-size: 0.88rem;
+      color: #9a9abf;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .tag-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: #2a2a4e;
+      color: #a89dff;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.6rem; }
+      .card { padding: 24px 18px; }
+      .profile-name { font-size: 1.5rem; }
+    }
+
+    /* ── 내비게이션 바 ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(22, 33, 62, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #2a2a4e;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #a89dff;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #9a9abf;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      background: #2a2a4e;
+      color: #e0e0e0;
+    }
+
+    .nav-links a.active {
+      background: rgba(108, 99, 255, 0.2);
+      color: #a89dff;
+    }
+
+    /* 앵커 이동 시 내비게이션 바에 가리지 않도록 오프셋 */
+    .card[id] {
+      scroll-margin-top: 72px;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 0.8rem;
+      color: #3a3a5e;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── 내비게이션 바 ── -->
+  <nav>
+    <a class="nav-logo" href="#">✦ 김민주</a>
+    <ul class="nav-links">
+      <li><a href="#profile">프로필</a></li>
+      <li><a href="#skills">기술 스택</a></li>
+      <li><a href="#projects">프로젝트</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>✦ 자기소개</h1>
+    <p>안녕하세요, 저를 소개합니다.</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- ── 프로필 ── -->
+    <div class="card" id="profile">
+      <div class="card-title">프로필</div>
+      <div class="profile-avatar">🧑‍💻</div>
+      <div class="profile-name">김민주</div>
+      <div class="profile-major">컴퓨터공학과 3학년</div>
+      <div class="profile-bio">
+        AI와 웹 개발에 관심 많은 학생입니다
+      </div>
+    </div>
+
+    <!-- ── 기술 스택 ── -->
+    <div class="card" id="skills">
+      <div class="card-title">기술 스택</div>
+      <div class="badge-wrap">
+        <div class="badge badge-html"><span class="dot"></span>HTML</div>
+        <div class="badge badge-css"><span class="dot"></span>CSS</div>
+        <div class="badge badge-js"><span class="dot"></span>JavaScript</div>
+        <div class="badge badge-py"><span class="dot"></span>Python</div>
+      </div>
+      <p class="skill-desc">
+        프론트엔드 기초 기술과 Python을 활용한 데이터 분석 및 AI 모델 학습을 공부하고 있습니다.
+        꾸준히 새로운 기술을 익히며 역량을 넓혀가는 중입니다.
+      </p>
+    </div>
+
+    <!-- ── 프로젝트 ── -->
+    <div class="card" id="projects">
+      <div class="card-title">프로젝트</div>
+      <div class="project-list">
+
+        <div class="project-item">
+          <h3>🌐 개인 포트폴리오 웹사이트</h3>
+          <p>
+            자신의 프로젝트와 기술 스택을 한눈에 보여주는 반응형 포트폴리오 웹사이트입니다.
+            다크 테마와 애니메이션을 적용하여 시각적 완성도를 높였습니다.
+          </p>
+          <div class="tag-wrap">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <h3>🤖 감정 분석 챗봇</h3>
+          <p>
+            사용자가 입력한 텍스트의 감정을 분류하고 공감형 답변을 제공하는 AI 챗봇입니다.
+            Python 기반 머신러닝 모델과 간단한 웹 인터페이스를 연동하였습니다.
+          </p>
+          <div class="tag-wrap">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">scikit-learn</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>&copy; 2026 홍길동 · 컴퓨터공학과 3학년</footer>
+
+  <script>
+    // 스크롤 위치에 따라 해당 섹션의 nav 링크에 active 클래스를 붙임
+    const sections = document.querySelectorAll('.card[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
