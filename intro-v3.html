@@ -122,6 +122,41 @@
       border-left: 3px solid #6c63ff;
     }
 
+    .profile-hobbies {
+      margin-top: 16px;
+    }
+
+    .profile-hobbies-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #6c63ff;
+      margin-bottom: 10px;
+    }
+
+    .hobby-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hobby-tag {
+      background: #2a2a4e;
+      color: #a89dff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid #3a3a6e;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .hobby-tag:hover {
+      background: rgba(108, 99, 255, 0.25);
+      color: #d4cfff;
+    }
+
     /* ── 기술 스택 섹션 ── */
     .badge-wrap {
       display: flex;
@@ -320,6 +355,14 @@
       <div class="profile-major">컴퓨터공학과 3학년</div>
       <div class="profile-bio">
         AI와 웹 개발에 관심 많은 학생입니다
+      </div>
+      <div class="profile-hobbies">
+        <div class="profile-hobbies-label">취미</div>
+        <div class="hobby-wrap">
+          <span class="hobby-tag">💻 코딩</span>
+          <span class="hobby-tag">📚 독서</span>
+          <span class="hobby-tag">🎮 게임</span>
+        </div>
       </div>
     </div>
 
