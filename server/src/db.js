@@ -16,4 +16,14 @@ db.exec(`
   )
 `);
 
+db.exec(`
+  CREATE TABLE IF NOT EXISTS questions (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    title      TEXT    NOT NULL,
+    content    TEXT    NOT NULL,
+    author     TEXT    NOT NULL DEFAULT '익명',
+    created_at TEXT    NOT NULL DEFAULT (datetime('now'))
+  )
+`);
+
 export default db;
