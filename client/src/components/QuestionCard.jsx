@@ -6,7 +6,7 @@ function formatDate(dateStr) {
   });
 }
 
-export default function QuestionCard({ question }) {
+export default function QuestionCard({ question, onDelete }) {
   const { content, createdAt, answer } = question;
 
   return (
@@ -17,6 +17,14 @@ export default function QuestionCard({ question }) {
           <p className="text-sm text-gray-800 leading-relaxed">{content}</p>
           <p className="text-xs text-gray-400 mt-1">{formatDate(createdAt)}</p>
         </div>
+        {onDelete && (
+          <button
+            onClick={() => onDelete(question.id)}
+            className="shrink-0 text-xs text-gray-300 hover:text-red-400 transition-colors"
+          >
+            삭제
+          </button>
+        )}
       </div>
 
       {answer && (
