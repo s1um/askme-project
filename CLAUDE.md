@@ -11,4 +11,4 @@
 ## 컴벤션
 - 컨포넌트: PascalCase (예: QuestionCard.jsx)
 - API 라우트: /api/ 접두사
-- 에러 응답: { errsr: string } 형식
+- 에러 응답: { error: string } 형식
