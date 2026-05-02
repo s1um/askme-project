@@ -1,63 +1,78 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShareLink from '../components/ShareLink';
 import UnansweredCard from '../components/UnansweredCard';
 import QuestionCard from '../components/QuestionCard';
 
-const DUMMY_USER = { id: 1, username: 'minju', displayName: '민주' };
-
-const DUMMY_QUESTIONS = [
-  {
-    id: 1,
-    content: '가장 좋아하는 음식이 뭐예요?',
-    isAnswered: false,
-    createdAt: '2026-05-02T10:00:00',
-    answer: null,
-  },
-  {
-    id: 2,
-    content: '개발을 시작하게 된 계기가 있나요?',
-    isAnswered: false,
-    createdAt: '2026-05-01T14:30:00',
-    answer: null,
-  },
-  {
-    id: 3,
-    content: '취미가 뭐예요?',
-    isAnswered: true,
-    createdAt: '2026-04-28T09:00:00',
-    answer: {
-      content: '코딩이요! 요즘은 사이드 프로젝트에 빠져있어요.',
-      createdAt: '2026-04-28T11:00:00',
-    },
-  },
-];
-
 export default function MyBox() {
   const navigate = useNavigate();
-  const user = DUMMY_USER;
-  const [questions, setQuestions] = useState(DUMMY_QUESTIONS);
+  const [user, setUser] = useState(null);
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    const headers = { Authorization: `Bearer ${token}` };
+    Promise.all([
+      fetch('/api/my/profile', { headers }).then((res) => {
+        if (res.status === 401) { navigate('/login'); return null; }
+        return res.json();
+      }),
+      fetch('/api/dashboard/questions', { headers }).then((res) => res.json()),
+    ]).then(([profile, qs]) => {
+      if (!profile) return;
+      localStorage.setItem('user', JSON.stringify(profile));
+      setUser(profile);
+      setQuestions(qs);
+    });
+  }, []);
 
   function handleLogout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     navigate('/');
   }
 
   async function handleAnswer(questionId, content) {
-    // TODO: POST /api/my/questions/:id/answer
-    setQuestions((prev) =>
-      prev.map((q) =>
-        q.id === questionId
-          ? { ...q, isAnswered: true, answer: { content, createdAt: new Date().toISOString() } }
-          : q
-      )
-    );
+    const token = localStorage.getItem('token');
+    const res = await fetch(`/api/my/questions/${questionId}/answer`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ content }),
+    });
+    if (res.ok) {
+      setQuestions((prev) =>
+        prev.map((q) =>
+          q.id === questionId
+            ? { ...q, isAnswered: true, answer: { content, createdAt: new Date().toISOString() } }
+            : q
+        )
+      );
+    }
   }
 
-  function handleDelete(questionId) {
-    // TODO: DELETE /api/my/questions/:id
-    setQuestions((prev) => prev.filter((q) => q.id !== questionId));
+  async function handleDelete(questionId) {
+    const token = localStorage.getItem('token');
+    const res = await fetch(`/api/my/questions/${questionId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.ok) {
+      setQuestions((prev) => prev.filter((q) => q.id !== questionId));
+    }
   }
+
+  if (!user) return (
+    <div className="min-h-screen flex items-center justify-center text-gray-400 text-sm">
+      불러오는 중...
+    </div>
+  );
 
   const unanswered = questions.filter((q) => !q.isAnswered);
   const answered = questions.filter((q) => q.isAnswered);

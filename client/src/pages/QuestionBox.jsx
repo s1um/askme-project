@@ -13,7 +13,7 @@ export default function QuestionBox() {
 
   async function fetchBox() {
     try {
-      const res = await fetch(`/api/questions/${username}`);
+      const res = await fetch(`/api/questions/${username}/answered`);
       if (res.status === 404) throw new Error('존재하지 않는 질문함입니다');
       if (!res.ok) throw new Error('불러오는 중 오류가 발생했습니다');
       const data = await res.json();

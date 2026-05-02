@@ -6,6 +6,15 @@ const router = Router();
 
 router.use(authMiddleware);
 
+router.get('/profile', (req, res) => {
+  const { userId } = req.user;
+  const user = db
+    .prepare('SELECT id, username, display_name FROM users WHERE id = ?')
+    .get(userId);
+  if (!user) return res.status(404).json({ error: '사용자를 찾을 수 없습니다' });
+  res.json({ id: user.id, username: user.username, displayName: user.display_name });
+});
+
 router.get('/questions', (req, res) => {
   const { userId } = req.user;
 

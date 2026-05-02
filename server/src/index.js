@@ -4,6 +4,7 @@ import apiRouter from './routes/api.js';
 import authRouter from '../routes/auth.js';
 import questionsRouter from '../routes/questions.js';
 import myRouter from '../routes/my.js';
+import dashboardRouter from '../routes/dashboard.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use('/api', apiRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/questions', questionsRouter);
 app.use('/api/my', myRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
