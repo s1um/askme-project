@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Landing from './pages/Landing';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import MyBox from './pages/MyBox';
+import QuestionBox from './pages/QuestionBox';
 
 export default function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('/api/hello')
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch(() => setMessage('서버에 연결할 수 없습니다.'));
-  }, []);
-
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>Askme</h1>
-      <p>서버 응답: {message || '불러오는 중...'}</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/my" element={<MyBox />} />
+        <Route path="/:username" element={<QuestionBox />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
