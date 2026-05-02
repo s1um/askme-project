@@ -65,7 +65,7 @@ router.get('/:username', (req, res) => {
   }));
 
   res.json({
-    user: { username: user.username, displayName: user.display_name },
+    user: { id: user.id, username: user.username, displayName: user.display_name },
     questions,
   });
 });
