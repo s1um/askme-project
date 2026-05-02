@@ -1,3 +1,64 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 export default function Login() {
-  return <h1>로그인 페이지</h1>;
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // TODO: 로그인 API 호출
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">로그인</h1>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-1">
+            <label htmlFor="username" className="text-sm font-medium text-gray-700">
+              아이디
+            </label>
+            <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="아이디를 입력하세요"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label htmlFor="password" className="text-sm font-medium text-gray-700">
+              비밀번호
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="비밀번호를 입력하세요"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full rounded-lg bg-blue-500 py-2 text-sm font-semibold text-white hover:bg-blue-600 transition-colors"
+          >
+            로그인
+          </button>
+        </form>
+
+        <p className="mt-5 text-center text-sm text-gray-400">
+          계정이 없으신가요?{' '}
+          <Link to="/signup" className="text-blue-500 font-medium hover:underline">
+            회원가입
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 }
