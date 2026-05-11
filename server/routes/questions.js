@@ -57,6 +57,7 @@ router.get('/:username/answered', (req, res) => {
   const questions = rows.map(row => ({
     id: row.id,
     content: row.content,
+    likes: row.likes,
     createdAt: row.created_at,
     answer: { content: row.answer_content, createdAt: row.answer_created_at },
   }));
@@ -106,6 +107,51 @@ router.get('/:username', (req, res) => {
     user: { id: user.id, username: user.username, displayName: user.display_name },
     questions,
   });
+});
+
+// 좋아요 추가
+router.post('/:id/like', (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id < 1) {
+      return res.status(400).json({ success: false, error: '잘못된 질문 ID입니다.' });
+    }
+
+    const question = db.prepare('SELECT id FROM questions WHERE id = ?').get(id);
+    if (!question) {
+      return res.status(404).json({ success: false, error: '존재하지 않는 질문입니다.' });
+    }
+
+    db.prepare('UPDATE questions SET likes = likes + 1 WHERE id = ?').run(id);
+    const { likes } = db.prepare('SELECT likes FROM questions WHERE id = ?').get(id);
+
+    res.json({ success: true, data: { likes } });
+  } catch (e) {
+    res.status(500).json({ success: false, error: '좋아요 처리 중 오류가 발생했습니다.' });
+  }
+});
+
+// 좋아요 취소
+router.delete('/:id/like', (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id < 1) {
+      return res.status(400).json({ success: false, error: '잘못된 질문 ID입니다.' });
+    }
+
+    const question = db.prepare('SELECT id FROM questions WHERE id = ?').get(id);
+    if (!question) {
+      return res.status(404).json({ success: false, error: '존재하지 않는 질문입니다.' });
+    }
+
+    // 0 미만으로 내려가지 않도록 보호
+    db.prepare('UPDATE questions SET likes = MAX(0, likes - 1) WHERE id = ?').run(id);
+    const { likes } = db.prepare('SELECT likes FROM questions WHERE id = ?').get(id);
+
+    res.json({ success: true, data: { likes } });
+  } catch (e) {
+    res.status(500).json({ success: false, error: '좋아요 취소 중 오류가 발생했습니다.' });
+  }
 });
 
 export default router;

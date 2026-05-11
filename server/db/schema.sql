@@ -23,8 +23,10 @@ CREATE TABLE IF NOT EXISTS questions (
   answer      TEXT,
   is_public   INTEGER NOT NULL DEFAULT 1 CHECK(is_public IN (0, 1)),
   answered_at TEXT,
+  likes       INTEGER NOT NULL DEFAULT 0,
   created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
+
 
 CREATE TABLE IF NOT EXISTS answers (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
