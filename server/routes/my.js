@@ -49,51 +49,73 @@ router.post('/questions/:id/answer', (req, res) => {
   const questionId = Number(req.params.id);
   const { content } = req.body;
 
+  if (!Number.isInteger(questionId) || questionId < 1) {
+    return res.status(400).json({ error: '잘못된 질문 ID입니다' });
+  }
+
   if (!content || typeof content !== 'string' || !content.trim()) {
     return res.status(400).json({ error: '답변 내용을 입력해주세요' });
   }
 
-  const question = db.prepare('SELECT id, user_id FROM questions WHERE id = ?').get(questionId);
-  if (!question) {
-    return res.status(404).json({ error: '존재하지 않는 질문입니다' });
-  }
-  if (question.user_id !== userId) {
-    return res.status(403).json({ error: '내 질문함의 질문만 답변할 수 있습니다' });
+  if (content.trim().length > 1000) {
+    return res.status(400).json({ error: '답변 내용은 1000자 이하여야 합니다' });
   }
 
-  const existing = db.prepare('SELECT id FROM answers WHERE question_id = ?').get(questionId);
-  if (existing) {
-    return res.status(409).json({ error: '이미 답변된 질문입니다' });
+  try {
+    const question = db.prepare('SELECT id, user_id FROM questions WHERE id = ?').get(questionId);
+    if (!question) {
+      return res.status(404).json({ error: '존재하지 않는 질문입니다' });
+    }
+    if (question.user_id !== userId) {
+      return res.status(403).json({ error: '내 질문함의 질문만 답변할 수 있습니다' });
+    }
+
+    const existing = db.prepare('SELECT id FROM answers WHERE question_id = ?').get(questionId);
+    if (existing) {
+      return res.status(409).json({ error: '이미 답변된 질문입니다' });
+    }
+
+    const answer = db.transaction(() => {
+      const result = db
+        .prepare('INSERT INTO answers (question_id, content) VALUES (?, ?)')
+        .run(questionId, content.trim());
+
+      db.prepare("UPDATE questions SET answered_at = datetime('now') WHERE id = ?")
+        .run(questionId);
+
+      return db
+        .prepare('SELECT id, content, created_at AS createdAt FROM answers WHERE id = ?')
+        .get(result.lastInsertRowid);
+    })();
+
+    res.status(201).json(answer);
+  } catch {
+    res.status(500).json({ error: '답변 처리 중 오류가 발생했습니다' });
   }
-
-  const answer = db.transaction(() => {
-    const result = db
-      .prepare('INSERT INTO answers (question_id, content) VALUES (?, ?)')
-      .run(questionId, content.trim());
-
-    db.prepare("UPDATE questions SET answered_at = datetime('now') WHERE id = ?")
-      .run(questionId);
-
-    return db.prepare('SELECT * FROM answers WHERE id = ?').get(result.lastInsertRowid);
-  })();
-
-  res.status(201).json(answer);
 });
 
 router.delete('/questions/:id', (req, res) => {
   const { userId } = req.user;
   const questionId = Number(req.params.id);
 
-  const question = db.prepare('SELECT id, user_id FROM questions WHERE id = ?').get(questionId);
-  if (!question) {
-    return res.status(404).json({ error: '존재하지 않는 질문입니다' });
-  }
-  if (question.user_id !== userId) {
-    return res.status(403).json({ error: '내 질문함의 질문만 삭제할 수 있습니다' });
+  if (!Number.isInteger(questionId) || questionId < 1) {
+    return res.status(400).json({ error: '잘못된 질문 ID입니다' });
   }
 
-  db.prepare('DELETE FROM questions WHERE id = ?').run(questionId);
-  res.status(204).end();
+  try {
+    const question = db.prepare('SELECT id, user_id FROM questions WHERE id = ?').get(questionId);
+    if (!question) {
+      return res.status(404).json({ error: '존재하지 않는 질문입니다' });
+    }
+    if (question.user_id !== userId) {
+      return res.status(403).json({ error: '내 질문함의 질문만 삭제할 수 있습니다' });
+    }
+
+    db.prepare('DELETE FROM questions WHERE id = ?').run(questionId);
+    res.status(204).end();
+  } catch {
+    res.status(500).json({ error: '삭제 처리 중 오류가 발생했습니다' });
+  }
 });
 
 export default router;

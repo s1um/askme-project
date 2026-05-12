@@ -22,11 +22,16 @@ router.post('/', (req, res) => {
     .prepare('INSERT INTO questions (user_id, content) VALUES (?, ?)')
     .run(ownerId, content.trim());
 
-  const question = db
-    .prepare('SELECT * FROM questions WHERE id = ?')
+  const row = db
+    .prepare('SELECT id, content, likes, created_at FROM questions WHERE id = ?')
     .get(result.lastInsertRowid);
 
-  res.status(201).json(question);
+  res.status(201).json({
+    id: row.id,
+    content: row.content,
+    likes: row.likes,
+    createdAt: row.created_at,
+  });
 });
 
 router.get('/:username/answered', (req, res) => {
@@ -143,7 +148,7 @@ router.delete('/:id/like', (req, res) => {
     if (!question) {
       return res.status(404).json({ success: false, error: '존재하지 않는 질문입니다.' });
     }
-
+    
     // 0 미만으로 내려가지 않도록 보호
     db.prepare('UPDATE questions SET likes = MAX(0, likes - 1) WHERE id = ?').run(id);
     const { likes } = db.prepare('SELECT likes FROM questions WHERE id = ?').get(id);
