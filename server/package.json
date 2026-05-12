@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch src/index.js",
-    "start": "node src/index.js",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
