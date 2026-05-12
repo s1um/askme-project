@@ -70,7 +70,7 @@ export default function QuestionForm({ ownerId, onSubmitted }) {
           <button
             type="submit"
             disabled={!content.trim() || isLoading}
-            className="flex items-center px-4 py-1.5 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center min-h-[44px] px-5 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             {isLoading && (
               <svg className="animate-spin h-4 w-4 mr-1.5 shrink-0" viewBox="0 0 24 24" fill="none">

@@ -30,7 +30,7 @@ export default function UnansweredCard({ question, onAnswer, onDelete }) {
         </div>
         <button
           onClick={() => onDelete(question.id)}
-          className="shrink-0 text-xs text-gray-300 dark:text-gray-600 hover:text-red-400 transition-colors"
+          className="shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center text-xs text-gray-300 dark:text-gray-600 hover:text-red-400 transition-colors"
         >
           삭제
         </button>
@@ -48,7 +48,7 @@ export default function UnansweredCard({ question, onAnswer, onDelete }) {
           <button
             type="submit"
             disabled={!answer.trim() || submitting}
-            className="px-4 py-1.5 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center min-h-[44px] px-5 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             {submitting ? '등록 중...' : '답변 등록'}
           </button>

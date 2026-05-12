@@ -69,7 +69,7 @@ export default function QuestionCard({ question, onDelete }) {
         {onDelete && (
           <button
             onClick={() => onDelete(id)}
-            className="shrink-0 text-xs text-gray-300 dark:text-gray-600 hover:text-red-400 transition-colors"
+            className="shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center text-xs text-gray-300 dark:text-gray-600 hover:text-red-400 transition-colors"
           >
             삭제
           </button>
@@ -90,7 +90,7 @@ export default function QuestionCard({ question, onDelete }) {
         <button
           onClick={handleLike}
           disabled={pending}
-          className={`flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border transition-colors
+          className={`flex items-center gap-1 text-xs px-4 min-h-[44px] rounded-full border transition-colors
             ${liked
               ? 'border-rose-300 text-rose-500 bg-rose-50 dark:bg-rose-900/20'
               : 'border-gray-200 dark:border-gray-600 text-gray-400 dark:text-gray-500 hover:border-rose-300 hover:text-rose-400'

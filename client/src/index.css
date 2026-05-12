@@ -2,3 +2,24 @@
 
 /* html에 .dark 클래스가 있을 때 dark: 유틸리티 적용 */
 @variant dark (&:is(.dark *));
+
+/* 가로 스크롤 방지 — 어떤 요소도 뷰포트 너비를 초과하지 못하게 함 */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  /* iOS 노치/Dynamic Island 하단 안전 영역 확보 */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* iOS Safari 자동 줌 방지
+   input/textarea/select의 font-size가 16px 미만이면 focus 시 페이지가 자동으로 확대됨.
+   @layer 밖에 선언하면 unlayered 규칙이 되어 Tailwind의 @layer utilities(text-sm 등)보다
+   cascade 우선순위가 높아지므로, 컴포넌트 클래스를 바꾸지 않고도 일괄 적용된다. */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
