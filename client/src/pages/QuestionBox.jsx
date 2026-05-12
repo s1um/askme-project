@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import UserProfile from '../components/UserProfile';
 import QuestionForm from '../components/QuestionForm';
 import QuestionList from '../components/QuestionList';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function QuestionBox() {
   const { username } = useParams();
@@ -32,7 +33,7 @@ export default function QuestionBox() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-400 text-sm">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 text-gray-400 text-sm">
         불러오는 중...
       </div>
     );
@@ -40,15 +41,19 @@ export default function QuestionBox() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-red-400 text-sm">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 text-red-400 text-sm">
         {error}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-lg mx-auto px-4 pb-16">
+        <div className="flex justify-end pt-4">
+          <ThemeToggle />
+        </div>
+
         <UserProfile displayName={user.displayName} username={username} />
 
         <div className="space-y-6">

@@ -59,17 +59,17 @@ export default function QuestionCard({ question, onDelete }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 space-y-3">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5 space-y-3">
       <div className="flex items-start gap-2">
-        <span className="shrink-0 text-xs font-semibold text-indigo-400 bg-indigo-50 px-2 py-0.5 rounded-full mt-0.5">Q</span>
+        <span className="shrink-0 text-xs font-semibold text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-full mt-0.5">Q</span>
         <div className="flex-1">
-          <p className="text-sm text-gray-800 leading-relaxed">{content}</p>
-          <p className="text-xs text-gray-400 mt-1">{formatDate(createdAt)}</p>
+          <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">{content}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{formatDate(createdAt)}</p>
         </div>
         {onDelete && (
           <button
             onClick={() => onDelete(id)}
-            className="shrink-0 text-xs text-gray-300 hover:text-red-400 transition-colors"
+            className="shrink-0 text-xs text-gray-300 dark:text-gray-600 hover:text-red-400 transition-colors"
           >
             삭제
           </button>
@@ -77,11 +77,11 @@ export default function QuestionCard({ question, onDelete }) {
       </div>
 
       {answer && (
-        <div className="flex items-start gap-2 pt-3 border-t border-gray-100">
-          <span className="shrink-0 text-xs font-semibold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full mt-0.5">A</span>
+        <div className="flex items-start gap-2 pt-3 border-t border-gray-100 dark:border-gray-700">
+          <span className="shrink-0 text-xs font-semibold text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full mt-0.5">A</span>
           <div className="flex-1">
-            <p className="text-sm text-gray-700 leading-relaxed">{answer.content}</p>
-            <p className="text-xs text-gray-400 mt-1">{formatDate(answer.createdAt)}</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{answer.content}</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{formatDate(answer.createdAt)}</p>
           </div>
         </div>
       )}
@@ -92,8 +92,8 @@ export default function QuestionCard({ question, onDelete }) {
           disabled={pending}
           className={`flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border transition-colors
             ${liked
-              ? 'border-rose-300 text-rose-500 bg-rose-50'
-              : 'border-gray-200 text-gray-400 hover:border-rose-300 hover:text-rose-400'
+              ? 'border-rose-300 text-rose-500 bg-rose-50 dark:bg-rose-900/20'
+              : 'border-gray-200 dark:border-gray-600 text-gray-400 dark:text-gray-500 hover:border-rose-300 hover:text-rose-400'
             } disabled:opacity-50`}
         >
           <span>{liked ? '❤️' : '🤍'}</span>

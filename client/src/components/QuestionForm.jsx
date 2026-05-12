@@ -37,8 +37,8 @@ export default function QuestionForm({ ownerId, onSubmitted }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-      <h2 className="text-sm font-semibold text-gray-500 mb-3">익명으로 질문하기</h2>
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
+      <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3">익명으로 질문하기</h2>
       <form onSubmit={handleSubmit}>
         <textarea
           value={content}
@@ -48,10 +48,10 @@ export default function QuestionForm({ ownerId, onSubmitted }) {
           }}
           placeholder="궁금한 점을 익명으로 물어보세요"
           rows={3}
-          className="w-full resize-none rounded-lg border border-gray-200 p-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-transparent"
+          className="w-full resize-none rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 p-3 text-sm text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:border-transparent"
         />
         <div className="flex items-center justify-between mt-2">
-          <span className={`text-xs ${content.length >= MAX_LENGTH ? 'text-red-400' : 'text-gray-400'}`}>
+          <span className={`text-xs ${content.length >= MAX_LENGTH ? 'text-red-400' : 'text-gray-400 dark:text-gray-500'}`}>
             {content.length} / {MAX_LENGTH}
           </span>
           <button

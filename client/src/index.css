@@ -1,1 +1,4 @@
 @import "tailwindcss";
+
+/* html에 .dark 클래스가 있을 때 dark: 유틸리티 적용 */
+@variant dark (&:is(.dark *));

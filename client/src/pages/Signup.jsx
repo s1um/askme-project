@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -35,16 +36,20 @@ export default function Signup() {
     navigate('/my');
   }
 
-  const inputClass = 'w-full rounded-lg border px-3 py-2 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent';
+  const inputClass = 'w-full rounded-lg border px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent';
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">회원가입</h1>
+    <div className="relative min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
+      <div className="w-full max-w-sm bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">회원가입</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1">
-            <label htmlFor="displayName" className="text-sm font-medium text-gray-700">
+            <label htmlFor="displayName" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               이름
             </label>
             <input
@@ -53,12 +58,12 @@ export default function Signup() {
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               placeholder="표시될 이름을 입력하세요"
-              className={`${inputClass} border-gray-200`}
+              className={`${inputClass} border-gray-200 dark:border-gray-600`}
             />
           </div>
 
           <div className="space-y-1">
-            <label htmlFor="username" className="text-sm font-medium text-gray-700">
+            <label htmlFor="username" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               아이디
             </label>
             <input
@@ -67,12 +72,12 @@ export default function Signup() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="아이디를 입력하세요"
-              className={`${inputClass} border-gray-200`}
+              className={`${inputClass} border-gray-200 dark:border-gray-600`}
             />
           </div>
 
           <div className="space-y-1">
-            <label htmlFor="password" className="text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               비밀번호
             </label>
             <input
@@ -81,12 +86,12 @@ export default function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="비밀번호를 입력하세요"
-              className={`${inputClass} border-gray-200`}
+              className={`${inputClass} border-gray-200 dark:border-gray-600`}
             />
           </div>
 
           <div className="space-y-1">
-            <label htmlFor="passwordConfirm" className="text-sm font-medium text-gray-700">
+            <label htmlFor="passwordConfirm" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               비밀번호 확인
             </label>
             <input
@@ -95,7 +100,7 @@ export default function Signup() {
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
               placeholder="비밀번호를 다시 입력하세요"
-              className={`${inputClass} ${mismatch ? 'border-red-400' : 'border-gray-200'}`}
+              className={`${inputClass} ${mismatch ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'}`}
             />
             {mismatch && (
               <p className="text-xs text-red-500">비밀번호가 일치하지 않습니다</p>
@@ -113,7 +118,7 @@ export default function Signup() {
           </button>
         </form>
 
-        <p className="mt-5 text-center text-sm text-gray-400">
+        <p className="mt-5 text-center text-sm text-gray-400 dark:text-gray-500">
           이미 계정이 있으신가요?{' '}
           <Link to="/login" className="text-blue-500 font-medium hover:underline">
             로그인

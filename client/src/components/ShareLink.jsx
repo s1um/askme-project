@@ -12,10 +12,10 @@ export default function ShareLink({ username }) {
   }
 
   return (
-    <div className="bg-indigo-50 rounded-2xl p-4">
+    <div className="bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl p-4">
       <p className="text-xs font-medium text-indigo-400 mb-2">내 질문함 링크</p>
       <div className="flex items-center gap-2">
-        <span className="flex-1 text-sm text-indigo-700 truncate">{url}</span>
+        <span className="flex-1 text-sm text-indigo-700 dark:text-indigo-300 truncate">{url}</span>
         <button
           onClick={handleCopy}
           className="shrink-0 px-3 py-1.5 rounded-lg bg-indigo-500 text-white text-xs font-medium hover:bg-indigo-600 transition-colors"
